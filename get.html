@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Messages | Firebase</title>
+  
+</head>
+
+<body>
+    <div class="container">
+        <form action="" id="integerForm" method="get">
+            <div class="inputBox">
+                <input type="number" id="integerID" placeholder="Enter an integer" />
+            </div>
+
+            <div class="inputBox">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-analytics.js";
+        import { getDatabase, set , ref } from "https://www.gstatic.com/firebasejs/9.9.2/firebase-database.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyCcdkYSf6_do5rM-L0DD_6ZOoq_QBF2lIw",
+          authDomain: "smesp-48695.firebaseapp.com",
+          databaseURL: "https://smesp-48695-default-rtdb.firebaseio.com",
+          projectId: "smesp-48695",
+          storageBucket: "smesp-48695.appspot.com",
+          messagingSenderId: "823498142043",
+          appId: "1:823498142043:web:4cff30382e4f3a6fc5aa7e",
+          measurementId: "G-PKR7Z44FCG"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        
+        var db =  getDatabase();
+  
+  document.getElementById("integerForm").addEventListener("submit", submitForm);
+  
+  function submitForm(e) {
+    e.preventDefault();
+  
+    var integer = document.getElementById('integerID').value;
+  
+    saveMessages(integer);
+  
+    document.getElementById("integerForm").reset();
+  }
+  
+  const saveMessages = (integer) => {
+    const db = getDatabase();
+  set(ref(db, 'integers/' + Math.floor(Math.random() * 100)), {
+    integerValue: integer,
+  });
+}
+  
+  const getElementVal = (id) => {
+    return document.getElementById(id).value;
+  };
+      </script>
+    <!-- <script src="./mail.js"></script> -->
+</body>
+
+</html>
